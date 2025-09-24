@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Joseph’s Institute of Management (SJIM)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Tinos', 'Times New Roman', serif;
+            background-color: #0a192f; /* Dark Navy Blue */
+            color: #e6f1ff; /* Light bluish-white */
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #64ffda; /* Mint Green Accent */
+            border-bottom-color: #64ffda;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+        .stat-box {
+            background-color: #112240; /* Lighter Navy */
+            border: 1px solid #64ffda;
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(100, 255, 218, 0.8);
+        }
+        .gallery-container {
+            position: relative;
+        }
+        .gallery-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(10, 25, 47, 0.7);
+            color: #64ffda;
+            border: 1px solid #64ffda;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .gallery-btn:hover {
+             background-color: rgba(100, 255, 218, 0.3);
+        }
+        #moving-graphics-box {
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #64ffda, #0a192f, #64ffda) 1;
+            animation: border-animation 5s infinite linear;
+        }
+        @keyframes border-animation {
+            0% { border-image: linear-gradient(45deg, #64ffda, #0a192f, #64ffda) 1; }
+            50% { border-image: linear-gradient(225deg, #64ffda, #0a192f, #64ffda) 1; }
+            100% { border-image: linear-gradient(405deg, #64ffda, #0a192f, #64ffda) 1; }
+        }
+    </style>
+</head>
+<body class="bg-[#0a192f]">
+
+    <!-- Header & Navigation -->
+    <header class="bg-[#0a192f] sticky top-0 z-50 shadow-lg shadow-cyan-900/50">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between py-2">
+                <a href="#" class="flex items-center space-x-3" onclick="showPage('home')">
+                    <img src="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758349544/sjim_logo_cxot6u.jpg" alt="SJIM Logo" class="h-16 w-16 rounded-full border-2 border-[#64ffda]">
+                    <span class="text-xl font-bold hidden md:block text-gray-200">SJIM</span>
+                </a>
+                <div class="hidden lg:flex items-center space-x-3 text-sm">
+                    <a href="#home" class="nav-link active" onclick="showPage('home', this)">Home</a>
+                    <a href="#admission" class="nav-link" onclick="showPage('admission', this)">Admission</a>
+                    <a href="http://library.sjim.edu.in/" target="_blank" class="nav-link">Library</a>
+                    <a href="#industry-connect" class="nav-link" onclick="showPage('industry-connect', this)">Industry Connect</a>
+                    <a href="#catalyst-center" class="nav-link" onclick="showPage('catalyst-center', this)">Catalyst</a>
+                    <a href="#placement" class="nav-link" onclick="showPage('placement', this)">Placement</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc41cdFiDmOaNVEL-LPa48VFrdGsFc0yzcVcHXpnkTZ4pGZvA/viewform?embedded=true" target="_blank" class="nav-link">Grievance Portal</a>
+                    <a href="https://sjim.linways.com/" target="_blank" class="nav-link">Linways</a>
+                    <a href="#career" class="nav-link" onclick="showPage('career', this)">Career</a>
+                    <a href="#contact" class="nav-link" onclick="showPage('contact', this)">Contact</a>
+                </div>
+                 <div class="flex items-center space-x-4 text-[#64ffda]">
+                    <a href="https://www.facebook.com/SJIMOfficial/" target="_blank" class="hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/school/15140952/" target="_blank" class="hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/c/StJosephsInstituteofManagementSJIM" target="_blank" class="hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/sjim_bengaluru/" target="_blank" class="hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                </div>
+                <button id="mobile-menu-button" class="lg:hidden text-2xl text-[#64ffda]">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-[#112240] py-4">
+             <a href="#home" class="block text-center py-2 nav-link" onclick="showPage('home', this); toggleMenu();">Home</a>
+             <a href="#admission" class="block text-center py-2 nav-link" onclick="showPage('admission', this); toggleMenu();">Admission</a>
+             <a href="http://library.sjim.edu.in/" target="_blank" class="block text-center py-2 nav-link">Library</a>
+             <a href="#industry-connect" class="block text-center py-2 nav-link" onclick="showPage('industry-connect', this); toggleMenu();">Industry Connect</a>
+             <a href="#catalyst-center" class="block text-center py-2 nav-link" onclick="showPage('catalyst-center', this); toggleMenu();">Catalyst</a>
+             <a href="#placement" class="block text-center py-2 nav-link" onclick="showPage('placement', this); toggleMenu();">Placement</a>
+             <a href="https://docs.google.com/forms/d/e/1FAIpQLSc41cdFiDmOaNVEL-LPa48VFrdGsFc0yzcVcHXpnkTZ4pGZvA/viewform?embedded=true" target="_blank" class="block text-center py-2 nav-link">Grievance Portal</a>
+             <a href="https://sjim.linways.com/" target="_blank" class="block text-center py-2 nav-link">Linways</a>
+             <a href="#career" class="block text-center py-2 nav-link" onclick="showPage('career', this); toggleMenu();">Career</a>
+             <a href="#contact" class="block text-center py-2 nav-link" onclick="showPage('contact', this); toggleMenu();">Contact</a>
+        </div>
+        <div class="marquee bg-[#112240] text-[#64ffda] py-2">
+            <span>Call for paper 8th International Conference - UTKASH 2025-26, Feb 13-14, 2026- <a href="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758690402/SJIM_ConferenceBanner_Feb26_s922rp.jpg" target="_blank" class="font-bold underline">Click Here !</a></span>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+            <div class="text-center mb-16 bg-cover bg-center rounded-lg p-8 md:p-20" style="background-image: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url('https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758354853/sjim_mquian.jpg');">
+                 <img src="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758349544/sjim_logo_cxot6u.jpg" alt="SJIM Logo" class="mx-auto h-24 w-24 rounded-full border-4 border-[#64ffda] mb-4">
+                <h1 class="text-4xl md:text-6xl font-bold text-white tracking-wider">St. Joseph’s Institute of Management</h1>
+                <p class="text-xl md:text-2xl mt-4 text-gray-300">Fostering Excellence in Management for Business and the Common Good</p>
+            </div>
+            
+            <!-- About Us -->
+            <div class="bg-[#112240] p-8 rounded-lg mb-12 shadow-xl">
+                 <h2 class="text-3xl font-bold text-[#64ffda] mb-6 text-center border-b-2 border-[#64ffda] pb-2">About Us</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <img src="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758354841/admission25_4_ze3gdm.webp" alt="SJIM Campus" class="rounded-lg shadow-lg w-full h-auto object-cover">
+                    <div class="text-justify text-lg leading-relaxed text-gray-300">
+                        <h3 class="text-2xl font-bold text-white mb-3">St. Joseph’s Institute of Management (SJIM)</h3>
+                        <p>St. Joseph’s Institute of Management (SJIM), Bangalore is an ever-evolving center of education and invention. Started in 1968 as offshoot of St. Joseph’s College of Commerce (SJCC) at Brigade Road, SJIM found itself a growing and reshaping itself along with other Jesuit-run St Joseph’s Colleges and Institutions in Bangalore. It renamed from St. Joseph’s College of Business Administration into St Joseph’s Institute of Management (SJIM) with an independent campus in the heart of the Garden City, M.G.Road, Bangalore. Approved by AICTE in 1996 for a Two Year Full-Time PGDM, accredited by NBA, is a member of Global Jesuits Network International Association of Jesuit Business Schools (IAJBS) and Xavier Association of Management Institutions (XAMI).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vision, Mission etc in a moving graphics box -->
+            <div id="moving-graphics-box" class="bg-[#112240] p-8 rounded-lg mb-12 shadow-xl">
+                <div class="grid md:grid-cols-2 gap-x-12 gap-y-8 text-justify">
+                    <div>
+                        <h3 class="text-2xl font-bold text-[#64ffda] mb-3"><i class="fas fa-eye mr-2"></i>Vision</h3>
+                        <p class="text-gray-300 leading-relaxed">To be an academic institution fostering excellence in management for business and the common good.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-[#64ffda] mb-3"><i class="fas fa-bullseye mr-2"></i>Mission</h3>
+                        <ul class="list-disc list-inside text-gray-300 leading-relaxed space-y-2">
+                            <li>To nurture academic excellence in our students through relevant business education and skills.</li>
+                            <li>To pursue thought leadership through scholarship and engagement with practice.</li>
+                            <li>To strive to address the needs of our stakeholders.</li>
+                            <li>To be responsive to current and emerging management areas.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-[#64ffda] mb-3"><i class="fas fa-gem mr-2"></i>Values</h3>
+                         <ul class="list-disc list-inside text-gray-300 leading-relaxed space-y-2">
+                            <li>Jesuit spirit of Magis</li>
+                            <li>Inclusiveness</li>
+                            <li>Ethical outlook</li>
+                            <li>Social concern</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-2xl font-bold text-[#64ffda] mb-3"><i class="fas fa-graduation-cap mr-2"></i>Program Educational Objectives (PEOs)</h3>
+                        <ul class="list-disc list-inside text-gray-300 leading-relaxed space-y-2">
+                            <li>To engender excellence in business education, scholarship and engagement with current local and global concerns.</li>
+                            <li>To enrich the whole person by developing individual and interpersonal business-related skills.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gallery -->
+            <div class="bg-[#112240] p-8 rounded-lg mb-12 shadow-xl">
+                <h2 class="text-3xl font-bold text-[#64ffda] mb-6 text-center border-b-2 border-[#64ffda] pb-2">Campus Life</h2>
+                <div class="gallery-container">
+                    <img id="gallery-image" src="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758690930/admission25_6_zxhmaj.webp" class="w-full h-auto max-h-[500px] object-cover rounded-lg transition-opacity duration-500">
+                    <button id="prev-btn" class="gallery-btn left-0 ml-4"><i class="fas fa-chevron-left"></i></button>
+                    <button id="next-btn" class="gallery-btn right-0 mr-4"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Director's Message -->
+            <div class="bg-[#112240] p-8 rounded-lg mb-12 shadow-xl">
+                <h2 class="text-3xl font-bold text-[#64ffda] mb-6 text-center border-b-2 border-[#64ffda] pb-2">Director’s Message</h2>
+                <div class="grid md:grid-cols-3 gap-8 items-start">
+                    <div class="md:col-span-1 flex flex-col items-center">
+                        <img src="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758688565/Fr.Roshan_vccl9h.jpg" alt="Director Rev. Dr Roshan David Pereira SJ" class="w-60 h-60 object-cover rounded-lg border-4 border-[#64ffda] shadow-lg">
+                        <h3 class="text-xl font-bold text-white mt-4">Rev. Dr Roshan David Pereira SJ</h3>
+                        <p class="text-gray-400">Director, SJIM</p>
+                    </div>
+                    <div class="md:col-span-2 text-justify text-lg leading-relaxed text-gray-300 space-y-4">
+                        <p class="italic text-cyan-300">“As we look ahead into the next century, leaders will be those who empower others.” - Bill Gates’ idea about the education system is that education isn’t just about jobs - it’s about forming people who empower and uplift others.</p>
+                        <p>At SJIM, we believe that the purpose of education is not only to prepare individuals for careers but also to develop leaders who can transform the world for the better. As a Jesuit institution, our vision, mission and values resonate deeply with global calls for action, such as the Universal Apostolic Preferences and the United Nations Sustainable Development Goals (SDGs), to end poverty, protect the planet, and ensure prosperity and dignity for all.</p>
+                        <p>Our academic programs, including the flagship PGDM, are designed to go beyond traditional management training. Students are encouraged to think critically and act ethically in addressing the world’s most pressing challenges - from climate change and technological inequity to economic inclusion, quality education, and responsible consumption.</p>
+                        <p>Here are a few things that make SJIM unique:</p>
+                        <ul class="list-disc list-inside pl-4 space-y-2">
+                            <li>A value-driven curriculum that integrates ethics with management education</li>
+                            <li>Strong industry-academia partnerships and regular interaction with corporate leaders</li>
+                            <li>Emphasis on research, innovation, and experiential learning</li>
+                            <li>A focus on social responsibility through rural immersion, service learning, and sustainability initiatives</li>
+                            <li>A vibrant campus culture that nurtures leadership, creativity, and collaboration</li>
+                        </ul>
+                        <p class="font-bold text-cyan-300 text-center mt-6">Welcome to SJIM — Where Leaders are Formed, Not Just Trained.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose SJIM -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-[#64ffda] mb-8 text-center border-b-2 border-[#64ffda] pb-2">Why Choose SJIM?</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="stat-box p-6 rounded-lg">
+                        <h4 class="text-4xl font-bold text-yellow-300">50+</h4>
+                        <p class="text-gray-300 mt-2">Years of Legacy</p>
+                    </div>
+                    <div class="stat-box p-6 rounded-lg">
+                        <h4 class="text-4xl font-bold text-yellow-300">10,000+</h4>
+                        <p class="text-gray-300 mt-2">Alumni</p>
+                    </div>
+                    <div class="stat-box p-6 rounded-lg">
+                        <h4 class="text-4xl font-bold text-yellow-300">150+</h4>
+                        <p class="text-gray-300 mt-2">Recruiters</p>
+                    </div>
+                    <div class="stat-box p-6 rounded-lg">
+                        <h4 class="text-4xl font-bold text-yellow-300">22 L</h4>
+                        <p class="text-gray-300 mt-2">Highest Package</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Admission Section -->
+        <section id="admission" class="content-section">
+            <h2 class="text-4xl font-bold text-[#64ffda] mb-8 text-center border-b-2 border-[#64ffda] pb-4">Admissions 2025</h2>
+            <div class="bg-[#112240] p-8 rounded-lg shadow-xl space-y-10">
+                <div>
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-4">Eligibility</h3>
+                    <ul class="list-disc list-inside text-justify text-gray-300 leading-relaxed space-y-2">
+                        <li>Graduate in BE/BTech/BCom/BBA/BSc/BA or any other bachelors degree from a recognized university under regular mode only.</li>
+                        <li>The candidate should have a consistent academic record of the first class (minimum 60% marks) in STD X, STD XII & Graduation.</li>
+                        <li>The candidates who have cleared all the subjects in their first attempt will be preferred. Candidates with a history of more than two arrears need not apply. Candidates who have appeared for the Final Graduate Level examination and are awaiting results may also apply.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-4">Dual Specializations</h3>
+                    <p class="text-gray-300 mb-3 text-justify">Students can choose any TWO from the following specializations:</p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                        <span class="bg-[#0a192f] p-3 rounded text-center">Finance</span>
+                        <span class="bg-[#0a192f] p-3 rounded text-center">Marketing</span>
+                        <span class="bg-[#0a192f] p-3 rounded text-center">HR</span>
+                        <span class="bg-[#0a192f] p-3 rounded text-center">Operations</span>
+                        <span class="bg-[#0a192f] p-3 rounded text-center">Analytics</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-4">Important Dates</h3>
+                    <ul class="list-none text-gray-300 space-y-2">
+                        <li class="flex justify-between border-b border-gray-700 py-2"><strong>22 May 2025:</strong> <span>Last date to submit the application</span></li>
+                        <li class="flex justify-between border-b border-gray-700 py-2"><strong>25 May 2025:</strong> <span>Personal Interview (Online)</span></li>
+                        <li class="flex justify-between border-b border-gray-700 py-2"><strong>28 May 2025:</strong> <span>Announcement of the selection list</span></li>
+                        <li class="flex justify-between py-2"><strong>2 June 2025:</strong> <span>Commencement of PGDM(MBA) 2025</span></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-4">Entrance Test Scores</h3>
+                    <ul class="list-disc list-inside text-justify text-gray-300 leading-relaxed space-y-2">
+                         <li><strong>CAT 2024:</strong> 60 percentile or above</li>
+                         <li><strong>XAT 2025:</strong> 60 percentile or above</li>
+                         <li><strong>MAT (Sep 2024, Dec 2024, Feb 2025, May 2025):</strong> A minimum of 550 Composite Score.</li>
+                         <li>We also accept <strong>GMAT, ATMA</strong> and <strong>CMAT</strong> scores (60 percentile or above)</li>
+                    </ul>
+                </div>
+                 <div>
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-4">Application & Shortlisting</h3>
+                    <p class="text-gray-300 leading-relaxed text-justify">Download Admission Prospectus from the website. Make an online payment of Rs 1,300 for application. Applicants will be shortlisted based on consistent academic performance, Entrance Test score, and work experience. The list of shortlisted candidates will be put up on the SJIM website for Personal Interview and English language test conducted online or offline. The individual candidates will also be informed through e-mail or SMS.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Industry Connect Section -->
+        <section id="industry-connect" class="content-section">
+            <h2 class="text-4xl font-bold text-[#64ffda] mb-8 text-center border-b-2 border-[#64ffda] pb-4">Industry Connect</h2>
+            <div class="bg-[#112240] p-8 rounded-lg shadow-xl text-justify text-gray-300 leading-relaxed space-y-6">
+                 <p>At St. Joseph's Institute of Management (SJIM), Bengaluru, we recognize the paramount importance of bridging the gap between academia and industry. Our Industry-Connect programs serve as a conduit for fostering meaningful collaborations between the academic community and various industries. By facilitating partnerships through Memorandums of Understanding (MOUs), SJIM endeavors to create mutually beneficial relationships that drive innovation, research, and experiential learning.</p>
+                <p>Through our Industry-Connect initiative, we seek to establish robust channels for knowledge exchange, skill development, and real-world problem-solving. By forging alliances with industries and institutions sharing similar goals and interests, we aim to enrich our academic programs, enhance student learning experiences, and address contemporary challenges faced by the industry.</p>
+                <h3 class="text-2xl font-bold text-cyan-300 pt-4">Our Co-partners and Collaborators</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <p>• Mazumdar Shaw Medical Foundation (MSMF)</p>
+                    <p>• Vayah Vikas</p>
+                    <p>• The Indus Entrepreneurs Bangalore Chapter (TiE)</p>
+                    <p>• NCDEX Institute of Commodity Markets and Research</p>
+                    <p>• Jai Rhine Industries Private Limited</p>
+                    <p>• KE Global</p>
+                    <p>• Jai Graphics Private Limited</p>
+                    <p>• Scholiverse Educare Private Limited (Internshala)</p>
+                    <p>• Indian Institute of Materials Management (IIMM) Bengaluru</p>
+                    <p>• Infosys Limited</p>
+                </div>
+                 <h3 class="text-2xl font-bold text-cyan-300 pt-4">Other Areas of Connection</h3>
+                 <p>We welcome you to also explore our other areas of connections with industry: MDPs / FDPs / PDWs, NIPM – Student, IIMM – Student Chapter.</p>
+            </div>
+        </section>
+
+        <!-- Catalyst Center Section -->
+        <section id="catalyst-center" class="content-section">
+            <h2 class="text-4xl font-bold text-[#64ffda] mb-8 text-center border-b-2 border-[#64ffda] pb-4">Catalyst Centre</h2>
+            <div class="bg-[#112240] p-8 rounded-lg shadow-xl text-gray-300 leading-relaxed space-y-6">
+                <img src="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758688173/1697114187603_ou7nnj.jpg" class="rounded-lg mb-6 w-full object-cover max-h-80">
+                <p class="text-justify text-lg">Catalyst Centre is the innovation and entrepreneurship hub of St. Joseph’s Institute of Management (SJIM). It nurtures entrepreneurial thinking, supports student-led startups, and empowers next-generation leaders through tiered programs, mentoring, and incubation support. From idea discovery to venture scaling, Catalyst provides a dynamic platform for students, alumni, and family business successors. Rooted in Jesuit values and driven by impact, the Centre is where vision meets action.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 text-justify pt-6">
+                    <div>
+                         <h3 class="text-2xl font-bold text-cyan-300 mb-4">Vision & Mission</h3>
+                         <p class="mb-2"><strong>Vision:</strong> Increase the success rate of startups in India, positively impacting the economy with more wealth creation for stakeholders.</p>
+                         <p><strong>Mission:</strong> Provide end to end support to innovative products and productized services to achieve positive disruption in the markets & society.</p>
+                    </div>
+                     <div>
+                         <h3 class="text-2xl font-bold text-cyan-300 mb-4">Contact Details</h3>
+                         <p><strong>Dr. Nirmala Joseph</strong><br>Chair, Catalyst Centre<br>Email: catalystcentre@sjim.edu.in / nirmala@sjim.edu.in</p>
+                         <p class="mt-4"><strong>Grishma Gee George</strong><br>Domain Head, Entrepreneurship<br>Email: Grishma2024099@sjim.edu.in</p>
+                    </div>
+                </div>
+
+                <div class="pt-6">
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-4">Objectives</h3>
+                    <ul class="list-disc list-inside space-y-2 text-justify">
+                        <li>Foster an Entrepreneurial Mindset</li>
+                        <li>Support Purpose-Driven Student Startups</li>
+                        <li>Enable Experiential Learning</li>
+                        <li>Build Collaborative Networks</li>
+                        <li>Champion Innovation for the Common Good</li>
+                        <li>Bridge Students with Real-World Opportunities</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+         <!-- Placement Section -->
+        <section id="placement" class="content-section">
+             <h2 class="text-4xl font-bold text-[#64ffda] mb-8 text-center border-b-2 border-[#64ffda] pb-4">Placements</h2>
+             <div class="text-center mb-8">
+                <a href="https://online.anyflip.com/xkcuw/frpj/mobile/index.html" target="_blank" class="bg-cyan-500 text-black font-bold py-3 px-8 rounded-lg hover:bg-cyan-400 transition duration-300 text-lg">View Recruiter’s Guide</a>
+             </div>
+             <div class="bg-[#112240] p-8 rounded-lg shadow-xl">
+                 <h3 class="text-2xl font-bold text-cyan-300 mb-6 text-center">Our Esteemed Recruiters</h3>
+                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 text-center text-gray-300">
+                    <span>Accenture</span> <span>Hewlett Packard</span> <span>PaloAlto</span> <span>Adecco India</span> <span>Hical</span> <span>Publicis Sapient</span> <span>ANZ</span> <span>Hitachi Vantara</span> <span>PUMA</span> <span>AON Consulting</span> <span>HT Media</span> <span>Purnartha</span> <span>Arcesium India</span> <span>Hudsons Bay</span> <span>PWC US Advisory</span> <span>Ather Energy</span> <span>IBM</span> <span>Qualcomm</span> <span>Bosch</span> <span>Ibus Networks</span> <span>Randstad</span> <span>Brillio</span> <span>ICICI Bank</span> <span>RBL Bank</span> <span>CBRE</span> <span>IDC India</span> <span>Refinitiv</span> <span>CGI India</span> <span>Indegene</span> <span>Reliance Jio</span> <span>Cimpress</span> <span>Inspirage</span> <span>Reliance Retail</span> <span>Citigroup</span> <span>IPSOS</span> <span>Saint Gobain</span> <span>Coffee Day</span> <span>ITC Infotech</span> <span>Salesforce</span> <span>Deccan Herald</span> <span>J P Morgan</span> <span>Schneider</span> <span>Dell</span> <span>Jockey</span> <span>Selling Simplified</span> <span>Deloitte US</span> <span>Kaseya</span> <span>Sonata Software</span> <span>Emids</span> <span>KPMG</span> <span>South Indian Bank</span> <span>Ernst & Young</span> <span>Lenskart</span> <span>Subex</span> <span>Eureka Forbes</span> <span>LSEG</span> <span>Swiss Re</span> <span>EXL Services</span> <span>Max Landmark</span> <span>Tally Solutions</span> <span>Federal Bank</span> <span>Mercedes Benz</span> <span>TAO Automation</span> <span>Fidelity</span> <span>Merkle Sokrati</span> <span>TCS</span> <span>Flipkart</span> <span>Mindtree</span> <span>TE Connectivity</span> <span>Gartner</span> <span>Moody's Analytics</span> <span>Tresvista</span> <span>Glenmark</span> <span>Morgan Stanley</span> <span>Ujjivan Bank</span> <span>Godrej & Boyce</span> <span>Mphasis</span> <span>Wildcraft</span> <span>Goldman Sachs</span> <span>MRF Ltd</span> <span>Xiaomi India</span> <span>Grant Thornton</span> <span>Nordex</span> <span>Yes Bank</span> <span>Hansa Research</span> <span>NttData</span> <span>ZS Associates</span> <span>HDFC Bank</span> <span>Oracle</span> <span>Zycus</span>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Career Section -->
+        <section id="career" class="content-section">
+            <h2 class="text-4xl font-bold text-[#64ffda] mb-8 text-center border-b-2 border-[#64ffda] pb-4">Career Opportunities</h2>
+            <div class="bg-[#112240] p-8 rounded-lg shadow-xl text-justify text-gray-300 leading-relaxed space-y-6">
+                <h3 class="text-2xl font-bold text-cyan-300">Recruitment Openings</h3>
+                <p>St Joseph’s Institute of Management (SJIM), Bengaluru invites applications from dedicated and committed faculty members who will be able to contribute to the Institute’s academic excellence and integrity. Applicants with full-time PhD and publications in ABDC/WoS/Scopus may apply.</p>
+                <p>Interested candidates should send their CV to <a href="mailto:careers@sjim.edu.in" class="text-[#64ffda] hover:underline">careers@sjim.edu.in</a> with a copy to <a href="mailto:director@sjim.edu.in" class="text-[#64ffda] hover:underline">director@sjim.edu.in</a>. Candidates with PhD from IIMs, IITs, NITs are preferred. SJIM is a top-ranked B School in India and AACSB member institution. It offers PGDM program which is equivalent to MBA and accredited by NBA. SJIM is a Jesuit Institution belonging to the XLRI group of business schools. Salary scale is as per AICTE norms.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="content-section">
+            <h2 class="text-4xl font-bold text-[#64ffda] mb-8 text-center border-b-2 border-[#64ffda] pb-4">Contact Us</h2>
+             <div class="bg-[#112240] p-8 rounded-lg shadow-xl">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-6 text-gray-300">
+                        <div>
+                            <h3 class="text-2xl font-bold text-cyan-300 mb-2">Address</h3>
+                            <p>St. Joseph's Institute of Management<br>No. 28/1 Primrose Road, (Off M.G. Road),<br>Bangalore - 560025.</p>
+                        </div>
+                        <div>
+                             <h3 class="text-2xl font-bold text-cyan-300 mb-2">Phone</h3>
+                            <p>080 2559 7781 / 2559 7791</p>
+                            <p><strong>Admission Queries:</strong> 99722 52765</p>
+                        </div>
+                        <div>
+                             <h3 class="text-2xl font-bold text-cyan-300 mb-2">Verification & Transcripts</h3>
+                             <a href="https://sjim.directverify.in/student/#/app/request" target="_blank" class="text-[#64ffda] hover:underline">Click here for educational verification</a>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead>
+                                    <tr class="border-b border-gray-600">
+                                        <th class="py-2 text-cyan-300">Contact</th><th class="py-2 text-cyan-300">Email</th><th class="py-2 text-cyan-300">Phone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-700">
+                                        <td class="py-2">Helpdesk</td><td class="py-2"><a href="mailto:info@sjim.edu.in" class="hover:underline">info@sjim.edu.in</a></td><td class="py-2">080-25597781</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-700">
+                                        <td class="py-2">Director's Office</td><td class="py-2"><a href="mailto:office@sjim.edu.in" class="hover:underline">office@sjim.edu.in</a></td><td class="py-2">080-25597781</td>
+                                    </tr>
+                                     <tr class="border-b border-gray-700">
+                                        <td class="py-2">PGDM Admissions</td><td class="py-2"><a href="mailto:admissions@sjim.edu.in" class="hover:underline">admissions@sjim.edu.in</a></td><td class="py-2">9972252765</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2">PGDM Placements</td><td class="py-2"><a href="mailto:placements@sjim.edu.in" class="hover:underline">placements@sjim.edu.in</a></td><td class="py-2">9591518855</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.020894561026!2d77.61020497587893!3d12.970554187345097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae167f269e4cb7%3A0xea3fe22f86508bad!2sSt.%20Joseph&#39;s%20Institute%20of%20Management!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-lg"></iframe>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0a192f] border-t-2 border-[#112240] mt-12 py-8 text-gray-400">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center items-center space-x-6 mb-6">
+                 <a href="https://www.facebook.com/SJIMOfficial/" target="_blank"><img src="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758690844/facebook-scalable-vector-graphics-icon-png-favpng-jfmfMWHVf685LcuKa5WC1jEVK_1_ywqodz.jpg" class="h-8 w-8 rounded-full hover:opacity-80 transition"></a>
+                 <a href="https://www.linkedin.com/school/15140952/" target="_blank"><img src="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758691107/download_vkbfuy.png" class="h-8 w-8 rounded-full hover:opacity-80 transition"></a>
+                 <a href="https://www.youtube.com/c/StJosephsInstituteofManagementSJIM" target="_blank"><img src="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758690797/youtube-icon-isolated-white-background-square-play-button-video-audio-social-media-app_989822-4717_jsi58i.avif" class="h-8 w-8 rounded-full hover:opacity-80 transition"></a>
+                 <a href="https://www.instagram.com/sjim_bengaluru/" target="_blank"><img src="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758690783/instagram-vector-logo-icon-social-media-logotype_901408-392_nm3bwt.avif" class="h-8 w-8 rounded-full hover:opacity-80 transition"></a>
+            </div>
+            <div class="mb-4">
+                 <p>St. Joseph's Institute of Management | No. 28/1 Primrose Road, (Off M.G. Road), Bangalore - 560025.</p>
+                 <p>Phone: 080 2559 7781 / 2559 7791 | Admissions: 99722 52765</p>
+            </div>
+            <img src="https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758721642/3b63fa28-f778-4958-8fc4-0b91d6c3f525.png" alt="Accreditation" class="mx-auto h-16 w-auto mt-4">
+            <p class="mt-6 text-sm">&copy; 2024 St. Joseph’s Institute of Management. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Zapier Chatbot Embed -->
+    <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+    <zapier-interfaces-chatbot-embed is-popup='true' chatbot-id='cmfrr1ww5002svy5m0bhx4ktv'></zapier-interfaces-chatbot-embed>
+
+    <script>
+        const pages = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function showPage(pageId, clickedLink) {
+            // Hide all pages
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show the target page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            // Update active link style
+            if(clickedLink) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                clickedLink.classList.add('active');
+            }
+            window.scrollTo(0, 0); // Scroll to top on page change
+        }
+
+        // Gallery functionality
+        const galleryImages = [
+            'https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758690930/admission25_6_zxhmaj.webp',
+            'https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758690929/admission25_5_melsqv.webp',
+            'https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758690927/admission25_1_jxhtlr.webp',
+            'https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758690928/admission25_2_ya8xni.webp',
+            'https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758354841/admission25_4_ze3gdm.webp',
+            'https://res.cloudinary.com/dlb4sy3rv/image/upload/v1758354853/sjim_mquian.jpg'
+        ];
+        let currentImageIndex = 0;
+        const galleryImageElement = document.getElementById('gallery-image');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+
+        function updateGalleryImage() {
+            galleryImageElement.style.opacity = '0';
+            setTimeout(() => {
+                galleryImageElement.src = galleryImages[currentImageIndex];
+                galleryImageElement.style.opacity = '1';
+            }, 500);
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateGalleryImage();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateGalleryImage();
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+        mobileMenuButton.addEventListener('click', toggleMenu);
+
+        // Set home page as default on load
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home', document.querySelector('a[href="#home"]'));
+        });
+    </script>
+
+</body>
+</html>
